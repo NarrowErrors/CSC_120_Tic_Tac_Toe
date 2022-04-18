@@ -7,9 +7,10 @@ def main():
 
   #Initializing row, col, player_id
   row = int(0)
-  col = int(0)
+  col = int(0) 
   player_id = int(1)
   cont = 'n'
+  counter = int(0)
 
   while cont == 'n':
     print_board()
@@ -28,7 +29,7 @@ def main():
       col -= 1
   #Check to see if space is taken
     space_available = check_mark(row, col)
-
+  
   #If space is taken
     while space_available == False:
       print("Space has been taken. Please choose another space.")
@@ -37,7 +38,7 @@ def main():
       col = int(input('Player ' + str(player_id) +', pick a column.'))
       col -= 1
       space_available = check_mark(row, col)
-
+    
   #Place mark and see if player won
     place_mark(row, col, player_id)
     winner = check_win(player_id)
@@ -47,10 +48,16 @@ def main():
       player_id = 2
     elif player_id == 2:
       player_id = 1
-
+    counter += 1
+    if counter == 9:
+      print("Draw")
+      exit()
   print_board()
   print('Winner: Player ' + str(player_id))
-
+  if player_id == 1:
+    print("Lost: Player 2")
+  if player_id == 2:
+    print("Lost: Player 1")
 
 
 def print_board():
@@ -63,7 +70,7 @@ def check_mark(row, col):
   else:
     return False
 
-def place_mark(row, col, player_id):
+def place_mark(row, col, player_id): 
   if player_id == 1:
     board[row][col] = 'X'
   if player_id == 2:
@@ -81,8 +88,8 @@ def check_win(player_id):
         return True
     elif list1[2] == 'X' and list2[1] == 'X' and list3[0] == 'X':
         return True
-    else:
-        return False
+    else: 
+        return False 
 
   if player_id == 2:
     for x in range(0, len(board)):
@@ -95,7 +102,7 @@ def check_win(player_id):
         return True
     elif list1[2] == 'O' and list2[1] == 'O' and list3[0] == 'O':
         return True
-    else:
-        return False
+    else: 
+        return False 
 
 main()
